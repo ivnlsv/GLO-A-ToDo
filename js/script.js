@@ -29,10 +29,10 @@ const render = function () {
       item.completed = !item.completed;
       render();
     });
+
     document
       .querySelector(".todo-remove")
       .addEventListener("click", function () {
-        console.log("Clicked");
         li.classList.remove("todo-item");
         li.innerHTML = "";
       });
