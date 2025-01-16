@@ -29,12 +29,12 @@ const render = function () {
       item.completed = !item.completed;
       render();
     });
-    todoRemove.addEventListener("click", function () {
-      li.classList.remove("todo-item");
-      render();
-    });
   });
 };
+todoRemove.addEventListener("click", function () {
+  li.classList.remove("todo-item");
+  render();
+});
 
 todoControl.addEventListener("submit", function (event) {
   event.preventDefault();
