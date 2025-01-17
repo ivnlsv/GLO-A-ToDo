@@ -30,22 +30,41 @@ const render = function () {
       render();
     });
 
-    document
-      .querySelector(".todo-remove")
-      .addEventListener("click", function () {
-        li.classList.remove("todo-item");
-        li.innerHTML = "";
-      });
+    li.querySelector(".todo-remove").addEventListener("click", function () {
+        const index = toDoData.indexOf(item);
+        if (index > -1) {
+            toDoData.splice(index, 1);
+            render();
+        }
+    });
   });
 };
+function saveToLocalStorage() { 
+    localStorage.setItem('todos', JSON.stringify(toDoData));
+}
+function getFromLocalStorage() { 
+    const todos = localStorage.getItem('todos');
+    if (todos) {
+        toDoData.push(...JSON.parse(todos));
+        render();
+    }
+        
+}
 
 todoControl.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const newToDo = {
-    text: headerInput.value,
-    completed: false,
-  };
-  toDoData.push(newToDo);
-  headerInput.value = "";
-  render();
+    event.preventDefault();
+    const inputValue = headerInput.value.trim();
+    if (inputValue !== "") {
+        const newToDo = {
+            text: headerInput.value,
+            completed: false,
+        };
+        toDoData.push(newToDo);
+        saveToLocalStorage();
+        headerInput.value = "";
+        render();
+    } else { 
+        alert("Введите текст задачи");
+    }
 });
+getFromLocalStorage();
