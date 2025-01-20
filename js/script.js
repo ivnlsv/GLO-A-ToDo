@@ -37,6 +37,7 @@ const render = function () {
             render();
         }
     });
+    saveToLocalStorage()
   });
 };
 function saveToLocalStorage() { 
@@ -48,9 +49,8 @@ function getFromLocalStorage() {
         toDoData.push(...JSON.parse(todos));
         render();
     }
-        
+     
 }
-
 todoControl.addEventListener("submit", function (event) {
     event.preventDefault();
     const inputValue = headerInput.value.trim();
